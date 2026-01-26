@@ -1,20 +1,14 @@
 import React from "react";
 import { AbsoluteFill, Series, staticFile, useCurrentFrame, interpolate } from "remotion";
 import { Audio } from "@remotion/media";
-import {
-  IntroScene,
-  INTRO_SCENE_DURATION,
-  ContentScene,
-  CONTENT_SCENE_DURATION,
-  OutroScene,
-  OUTRO_SCENE_DURATION,
-} from "./scenes";
 
-// Total duration of all scenes combined
-export const FULL_VIDEO_DURATION =
-  INTRO_SCENE_DURATION +
-  CONTENT_SCENE_DURATION +
-  OUTRO_SCENE_DURATION;
+// TODO: Import your scenes here
+// import { IntroScene, INTRO_SCENE_DURATION } from "./scenes/IntroScene";
+// import { FeatureScene, FEATURE_SCENE_DURATION } from "./scenes/FeatureScene";
+// import { CTAScene, CTA_SCENE_DURATION } from "./scenes/CTAScene";
+
+// TODO: Calculate total duration from all scenes
+export const FULL_VIDEO_DURATION = 300; // 10 seconds placeholder
 
 // Music fade settings
 const MUSIC_FADE_IN = 10;
@@ -46,21 +40,36 @@ const BackgroundMusic: React.FC = () => {
 
 export const FullVideo: React.FC = () => {
   return (
-    <AbsoluteFill>
-      {/* Sequence all scenes using Series */}
+    <AbsoluteFill style={{ backgroundColor: "#0f0f23" }}>
+      {/* TODO: Add your scenes using Series */}
+      {/*
       <Series>
         <Series.Sequence durationInFrames={INTRO_SCENE_DURATION}>
           <IntroScene />
         </Series.Sequence>
-
-        <Series.Sequence durationInFrames={CONTENT_SCENE_DURATION}>
-          <ContentScene />
+        <Series.Sequence durationInFrames={FEATURE_SCENE_DURATION}>
+          <FeatureScene />
         </Series.Sequence>
-
-        <Series.Sequence durationInFrames={OUTRO_SCENE_DURATION}>
-          <OutroScene />
+        <Series.Sequence durationInFrames={CTA_SCENE_DURATION}>
+          <CTAScene />
         </Series.Sequence>
       </Series>
+      */}
+
+      {/* Placeholder - remove when adding scenes */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          color: "white",
+          fontSize: 48,
+          fontFamily: "Inter, sans-serif",
+        }}
+      >
+        Create your scenes in src/remotion/scenes/
+      </div>
 
       {/* Voiceover */}
       <Audio src={staticFile("audio/voiceover.wav")} volume={1} />
