@@ -1,0 +1,57 @@
+{
+  "topic": "AI product development platform software technology",
+  "script": "ConceptCraft. Turbocharge your product development with AI.",
+  "voiceover": {
+    "path": "audio/voiceover.wav",
+    "duration": 2.8,
+    "voice": "Kore",
+    "provider": "gemini",
+    "cost": 0.000885
+  },
+  "music": {
+    "path": "audio/music.mp3",
+    "duration": 8,
+    "prompt": "cinematic dramatic, epic orchestral, powerful impact, modern tech",
+    "cost": 0.06666666666666667
+  },
+  "images": [
+    {
+      "path": "images/scene-1.jpeg",
+      "url": "https://miro.medium.com/v2/resize:fit:1400/1*KfeaX094P8N_BALXBYIsjw.jpeg",
+      "width": 1400,
+      "height": 788,
+      "query": "AI product development platform software technology"
+    },
+    {
+      "path": "images/scene-2.jpg",
+      "url": "https://spyro-soft.com/wp-content/uploads/2025/02/image-hmi-ai-in-product-development-diagram-1024x747.jpg",
+      "width": 1024,
+      "height": 747,
+      "query": "AI product development platform software technology"
+    }
+  ],
+  "scenes": [
+    {
+      "id": 1,
+      "title": "Hook",
+      "durationInFrames": 90,
+      "description": "Opening scene that grabs attention immediately.\n\n**Visual:** Dark gradient background (#0f0f23 to #6366f1), large bold headline centered on screen.\n\n**Animation:** Title slides up with spring animation (damping: 200, stiffness: 100). Subtle accent line grows from center.\n\n**Text:** Display the main hook/headline from the script's opening line.\n\n**Mood:** Bold, attention-grabbing, professional.",
+      "imagePath": "images/scene-1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Content",
+      "durationInFrames": 150,
+      "description": "Main content scene presenting key value propositions.\n\n**Visual:** Light background (#ffffff), left-aligned heading with bullet points below.\n\n**Animation:** Heading fades in from left. Bullet points appear with staggered delays (15 frames apart). Each bullet has a colored accent dot.\n\n**Text:** Extract 3 key points from the script. Display as animated bullet list.\n\n**Mood:** Clean, informative, easy to scan.",
+      "imagePath": "images/scene-2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "CTA",
+      "durationInFrames": 90,
+      "description": "Closing call-to-action scene.\n\n**Visual:** Dark background matching intro (#0f0f23). Centered CTA button with glowing effect. URL/website below in muted text.\n\n**Animation:** CTA scales in with spring. Pulsing glow effect on button (subtle, every 2 seconds). URL fades in after button.\n\n**Text:** Strong call-to-action phrase. Website or contact info below.\n\n**Mood:** Urgent but professional, drives action."
+    }
+  ],
+  "totalCost": 0.07055166666666667,
+  "createdAt": "2026-01-26T15:10:38.997Z"
+}
