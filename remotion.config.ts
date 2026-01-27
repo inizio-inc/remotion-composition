@@ -8,4 +8,7 @@ import { webpackOverride } from "./src/remotion/webpack-override.mjs";
 
 Config.setVideoImageFormat("jpeg");
 
+// 60fps for smooth spring animations and kinetic motion
+Config.setFps(60);
+
 Config.overrideWebpackConfig(webpackOverride);
