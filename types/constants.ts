@@ -1,7 +1,12 @@
-// Video configuration
+// Video configuration - Landscape (16:9)
 export const VIDEO_WIDTH = 1920;
 export const VIDEO_HEIGHT = 1080;
 export const VIDEO_FPS = 60; // 60fps for smooth spring animations
+
+// TikTok/Reels/Shorts configuration - Vertical (9:16)
+export const TIKTOK_WIDTH = 1080;
+export const TIKTOK_HEIGHT = 1920;
+export const TIKTOK_FPS = 30;
 
 // Default colors (can be overridden per scene)
 export const COLORS = {

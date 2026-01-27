@@ -1,6 +1,13 @@
 import React from "react";
-import { Composition } from "remotion";
-import { VIDEO_FPS, VIDEO_HEIGHT, VIDEO_WIDTH } from "../../types/constants";
+import { Composition, staticFile } from "remotion";
+import {
+  VIDEO_FPS,
+  VIDEO_HEIGHT,
+  VIDEO_WIDTH,
+  TIKTOK_FPS,
+  TIKTOK_HEIGHT,
+  TIKTOK_WIDTH,
+} from "../../types/constants";
 
 // Import individual scenes (for preview/development)
 import {
@@ -14,6 +21,10 @@ import {
 
 // Import full video composition
 import { FullVideo, FULL_VIDEO_DURATION } from "./FullVideo";
+
+// Import TikTok composition
+import { TikTokVideo, tikTokVideoSchema } from "./tiktok";
+import { getVideoMetadata } from "@remotion/media-utils";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -60,6 +71,39 @@ export const RemotionRoot: React.FC = () => {
         fps={VIDEO_FPS}
         width={VIDEO_WIDTH}
         height={VIDEO_HEIGHT}
+      />
+
+      {/* ============================================ */}
+      {/* TikTok/Reels/Shorts - Vertical 9:16         */}
+      {/* ============================================ */}
+
+      <Composition
+        id="TikTokVideo"
+        component={TikTokVideo}
+        schema={tikTokVideoSchema}
+        calculateMetadata={async ({ props }) => {
+          const fps = TIKTOK_FPS;
+          try {
+            const metadata = await getVideoMetadata(props.src);
+            return {
+              fps,
+              durationInFrames: Math.floor(metadata.durationInSeconds * fps),
+            };
+          } catch {
+            // Fallback duration if no video metadata
+            return {
+              fps,
+              durationInFrames: 60 * fps, // 60 seconds default
+            };
+          }
+        }}
+        width={TIKTOK_WIDTH}
+        height={TIKTOK_HEIGHT}
+        defaultProps={{
+          src: staticFile("sample-video.mp4"),
+          showSafeZone: true,
+          highlightColor: "#39E508",
+        }}
       />
     </>
   );

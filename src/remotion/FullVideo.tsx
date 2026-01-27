@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Series, staticFile, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, staticFile, useCurrentFrame, interpolate } from "remotion";
 import { Audio } from "@remotion/media";
 
 // TODO: Import your scenes here
