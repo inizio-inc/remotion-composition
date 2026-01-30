@@ -1,5 +1,5 @@
 import React from "react";
-import { Composition, staticFile } from "remotion";
+import { Composition } from "remotion";
 import {
   VIDEO_FPS,
   VIDEO_HEIGHT,
@@ -9,119 +9,59 @@ import {
   TIKTOK_WIDTH,
 } from "../../types/constants";
 
-// Import individual scenes (for preview/development)
-import {
-  IntroScene,
-  INTRO_SCENE_DURATION,
-  ContentScene,
-  CONTENT_SCENE_DURATION,
-  OutroScene,
-  OUTRO_SCENE_DURATION,
-} from "./scenes";
-
-// Import full video composition
-import { FullVideo, FULL_VIDEO_DURATION } from "./FullVideo";
-
-// Import TikTok composition
-import { TikTokVideo, tikTokVideoSchema } from "./tiktok";
-import { getVideoMetadata } from "@remotion/media-utils";
-
-// Import CaptionedVideo composition (cc-slides compatible)
-import { CaptionedVideo, videoCompositionSchema, calculateCaptionedVideoMetadata } from "./captioned";
+// Both YouTube and TikTok use the same timeline-based composition.
+// Only differences: dimensions and captions toggle.
+import { Video, videoSchema, calculateVideoMetadata } from "./video";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       {/* ============================================ */}
-      {/* Individual Scenes - for preview/development */}
+      {/* YOUTUBE - Landscape 16:9 (1920x1080)        */}
       {/* ============================================ */}
+      {/*
+        Usage: pnpm exec remotion render YouTubeVideo out/youtube.mp4 \
+               --props='{"timeline":'$(cat public/video-manifest.json | jq -c .timeline)',"showCaptions":false}'
+
+        Timeline-based, NO captions.
+      */}
 
       <Composition
-        id="IntroScene"
-        component={IntroScene}
-        durationInFrames={INTRO_SCENE_DURATION}
+        id="YouTubeVideo"
+        component={Video}
         fps={VIDEO_FPS}
         width={VIDEO_WIDTH}
         height={VIDEO_HEIGHT}
-      />
-
-      <Composition
-        id="ContentScene"
-        component={ContentScene}
-        durationInFrames={CONTENT_SCENE_DURATION}
-        fps={VIDEO_FPS}
-        width={VIDEO_WIDTH}
-        height={VIDEO_HEIGHT}
-      />
-
-      <Composition
-        id="OutroScene"
-        component={OutroScene}
-        durationInFrames={OUTRO_SCENE_DURATION}
-        fps={VIDEO_FPS}
-        width={VIDEO_WIDTH}
-        height={VIDEO_HEIGHT}
+        schema={videoSchema}
+        calculateMetadata={calculateVideoMetadata as any}
+        defaultProps={{
+          timeline: {
+            elements: [],
+            audio: [],
+            text: [],
+          },
+          showCaptions: false,
+        }}
       />
 
       {/* ============================================ */}
-      {/* Full Video - all scenes combined            */}
+      {/* TIKTOK/REELS/SHORTS - Vertical 9:16         */}
       {/* ============================================ */}
+      {/*
+        Usage: pnpm exec remotion render TikTokVideo out/tiktok.mp4 \
+               --props='{"timeline":'$(cat public/video-manifest.json | jq -c .timeline)',"showCaptions":true}'
 
-      <Composition
-        id="FullVideo"
-        component={FullVideo}
-        durationInFrames={FULL_VIDEO_DURATION}
-        fps={VIDEO_FPS}
-        width={VIDEO_WIDTH}
-        height={VIDEO_HEIGHT}
-      />
-
-      {/* ============================================ */}
-      {/* TikTok/Reels/Shorts - Vertical 9:16         */}
-      {/* ============================================ */}
+        Timeline-based, WITH captions.
+      */}
 
       <Composition
         id="TikTokVideo"
-        component={TikTokVideo}
-        schema={tikTokVideoSchema}
-        calculateMetadata={async ({ props }) => {
-          const fps = TIKTOK_FPS;
-          try {
-            const metadata = await getVideoMetadata(props.src);
-            return {
-              fps,
-              durationInFrames: Math.floor(metadata.durationInSeconds * fps),
-            };
-          } catch {
-            // Fallback duration if no video metadata
-            return {
-              fps,
-              durationInFrames: 60 * fps, // 60 seconds default
-            };
-          }
-        }}
-        width={TIKTOK_WIDTH}
-        height={TIKTOK_HEIGHT}
-        defaultProps={{
-          src: staticFile("sample-video.mp4"),
-          showSafeZone: true,
-          highlightColor: "#39E508",
-        }}
-      />
-
-      {/* ============================================ */}
-      {/* CaptionedVideo - cc-slides compatible        */}
-      {/* Timeline-based with character-level captions */}
-      {/* ============================================ */}
-
-      <Composition
-        id="CaptionedVideo"
-        component={CaptionedVideo}
+        component={Video}
         fps={TIKTOK_FPS}
         width={TIKTOK_WIDTH}
         height={TIKTOK_HEIGHT}
-        schema={videoCompositionSchema}
-        calculateMetadata={calculateCaptionedVideoMetadata as any}
+        schema={videoSchema}
+        calculateMetadata={calculateVideoMetadata as any}
         defaultProps={{
           timeline: {
             elements: [],

@@ -58,7 +58,7 @@ const MediaElement: React.FC<{
   );
 };
 
-export const CaptionedVideo: React.FC<{
+export const Video: React.FC<{
   timeline: any;
   showCaptions?: boolean;
 }> = ({ timeline, showCaptions = true }) => {

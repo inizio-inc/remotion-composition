@@ -2,13 +2,14 @@ import { CalculateMetadataFunction } from "remotion";
 import z from "zod";
 
 // Schema for video composition props
-export const videoCompositionSchema = z.object({
+// Used by both YouTubeVideo and TikTokVideo
+export const videoSchema = z.object({
   timeline: z.any(),
   showCaptions: z.boolean(),
 })
 
-export const calculateCaptionedVideoMetadata: CalculateMetadataFunction<
-  z.infer<typeof videoCompositionSchema>
+export const calculateVideoMetadata: CalculateMetadataFunction<
+  z.infer<typeof videoSchema>
 > = async ({ props }) => {
   const fps = 30;
 
@@ -54,5 +55,5 @@ export const calculateCaptionedVideoMetadata: CalculateMetadataFunction<
   };
 };
 
-// Export client components from separate files
-export { CaptionedVideo } from './CaptionedVideo';
+// Export client components
+export { Video } from './Video';
