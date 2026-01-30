@@ -37,3 +37,8 @@ next-env.d.ts
 out/
 .env
 build
+# Generated video assets
+public/audio/
+public/images/
+public/videos/
+public/video-manifest.json
