@@ -26,6 +26,9 @@ import { FullVideo, FULL_VIDEO_DURATION } from "./FullVideo";
 import { TikTokVideo, tikTokVideoSchema } from "./tiktok";
 import { getVideoMetadata } from "@remotion/media-utils";
 
+// Import CaptionedVideo composition (cc-slides compatible)
+import { CaptionedVideo, videoCompositionSchema, calculateCaptionedVideoMetadata } from "./captioned";
+
 export const RemotionRoot: React.FC = () => {
   return (
     <>
@@ -103,6 +106,29 @@ export const RemotionRoot: React.FC = () => {
           src: staticFile("sample-video.mp4"),
           showSafeZone: true,
           highlightColor: "#39E508",
+        }}
+      />
+
+      {/* ============================================ */}
+      {/* CaptionedVideo - cc-slides compatible        */}
+      {/* Timeline-based with character-level captions */}
+      {/* ============================================ */}
+
+      <Composition
+        id="CaptionedVideo"
+        component={CaptionedVideo}
+        fps={TIKTOK_FPS}
+        width={TIKTOK_WIDTH}
+        height={TIKTOK_HEIGHT}
+        schema={videoCompositionSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata as any}
+        defaultProps={{
+          timeline: {
+            elements: [],
+            audio: [],
+            text: [],
+          },
+          showCaptions: true,
         }}
       />
     </>
