@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 import { COLORS } from "../../../types/constants";
 
-export const OUTRO_SCENE_DURATION = 90; // 3 seconds at 30fps / 1.5 seconds at 60fps
+export const OUTRO_SCENE_DURATION = 90; // 3 seconds at 30fps
 
 export const OutroScene: React.FC = () => {
   return (

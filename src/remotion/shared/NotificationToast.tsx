@@ -25,7 +25,7 @@ interface NotificationToastProps {
 export const NotificationToast: React.FC<NotificationToastProps> = ({
   children,
   enterFrame = 0,
-  holdDuration = 90, // 1.5 seconds at 60fps
+  holdDuration = 90, // 3 seconds at 30fps
   exitFrame,
   direction = "right",
   distance = 100,

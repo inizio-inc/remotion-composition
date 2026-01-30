@@ -8,7 +8,7 @@ import { webpackOverride } from "./src/remotion/webpack-override.mjs";
 
 Config.setVideoImageFormat("jpeg");
 
-// Note: FPS is set in the Composition component (fps={60}), not in config
+// Note: FPS is set in the Composition component (fps={30}), not in config
 // Remotion v4+ removed Config.setFps() - set fps prop on <Composition> instead
 
 Config.overrideWebpackConfig(webpackOverride);
